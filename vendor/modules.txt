@@ -1,3 +1,6 @@
+# github.com/google/uuid v1.3.1
+## explicit
+github.com/google/uuid
 # google.golang.org/protobuf v1.28.1
 ## explicit
 google.golang.org/protobuf/cmd/protoc-gen-go
