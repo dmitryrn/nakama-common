@@ -93,6 +93,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/heroiclabs/nakama-common/api"
 	"github.com/heroiclabs/nakama-common/rtapi"
 )
@@ -308,7 +309,6 @@ It is made available to the InitModule function as an input parameter when the f
 NOTE: You must not cache the reference to this and reuse it as a later point as this could have unintended side effects.
 */
 type Initializer interface {
-
 	/*
 		RegisterRpc registers a function with the given ID. This ID can be used within client code to send an RPC message to
 		execute the function and return the result. Results are always returned as a JSON string (or optionally empty string).
@@ -1139,6 +1139,8 @@ type NakamaModule interface {
 	ChannelMessagesList(ctx context.Context, channelId string, limit int, forward bool, cursor string) (messages []*api.ChannelMessage, nextCursor string, prevCursor string, err error)
 
 	GetSatori() Satori
+
+	MatchmakerExtract(ctx context.Context) []*MatchmakerExtract
 }
 
 /*
@@ -1206,4 +1208,29 @@ type LiveEvent struct {
 	Value              string `json:"value,omitempty"`
 	ActiveStartTimeSec int64  `json:"active_start_time_sec,omitempty"`
 	ActiveEndTimeSec   int64  `json:"active_end_time_sec,omitempty"`
+}
+
+type MatchmakerExtract struct {
+	Presences         []*MatchmakerPresence
+	SessionID         string
+	PartyId           string
+	Query             string
+	MinCount          int
+	MaxCount          int
+	CountMultiple     int
+	StringProperties  map[string]string
+	NumericProperties map[string]float64
+	Ticket            string
+	Count             int
+	Intervals         int
+	CreatedAt         int64
+	Node              string
+}
+
+type MatchmakerPresence struct {
+	UserId    string    `json:"user_id"`
+	SessionId string    `json:"session_id"`
+	Username  string    `json:"username"`
+	Node      string    `json:"node"`
+	SessionID uuid.UUID `json:"-"`
 }
