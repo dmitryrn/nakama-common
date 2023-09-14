@@ -1,6 +1,6 @@
-# github.com/google/uuid v1.3.1
+# github.com/gofrs/uuid v4.4.0+incompatible
 ## explicit
-github.com/google/uuid
+github.com/gofrs/uuid
 # google.golang.org/protobuf v1.28.1
 ## explicit
 google.golang.org/protobuf/cmd/protoc-gen-go
